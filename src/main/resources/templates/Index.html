@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Inicio</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      margin-top: 2rem;
+    }
+
+    h1, h3 {
+      margin-bottom: 1.5rem;
+      color: #343a40;
+    }
+
+    .table {
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+    }
+
+    .btn-warning, .btn-danger {
+      width: 100px;
+      font-size: 0.9rem;
+    }
+
+    a.btn-success {
+      padding: 1rem;
+      font-size: 1.1rem;
+    }
+
+  </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="container">
+  <h1 class="text-center">Elite Brands SA de CV</h1>
+  <h3 class="text-center">Reporte de Costos y Existencias al <span th:text="${fecha}"></span></h3>
+
+  <div>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>costo</th>
+        <th>Precio</th>
+        <th>Existencias</th>
+        <th colspan="2" class="text-center">Acciones</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr th:each="producto : ${productos}">
+        <td th:text="${producto.id}">Mostrar ID</td>
+        <td th:text="${producto.descripcion}">Mostrar Descripción</td>
+        <td th:text="${producto.costo}">Mostrar Costo</td>
+        <td th:text="${producto.precio}">Mostrar Precio</td>
+        <td th:text="${producto.existencia}">Mostrar Existencias</td>
+
+        <td>
+          <a class="btn btn-warning">Editar</a>
+        </td>
+        <td>
+          <form>
+            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?');">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Botón para exportar a Excel -->
+  <div class="container text-center mt-4">
+    <a th:href="@{/exportar/excel}" class="btn btn-success btn-lg">
+      📥 Exportar a Excel
+    </a>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
